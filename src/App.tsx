@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import React, { useEffect, useState } from 'react';
+
+import GoogleLogin from 'react-google-login';
+import logo from './logo.svg';
 
 interface AppProps {}
 
@@ -12,6 +15,12 @@ function App({}: AppProps) {
     const timer = setTimeout(() => setCount(count + 1), 1000);
     return () => clearTimeout(timer);
   }, [count, setCount]);
+  function responseGoogle(event: any) {
+    console.info(event);
+  }
+  function responseGoogleError(event: any) {
+    console.info(event);
+  }
   // Return the App component.
   return (
     <div className="App">
@@ -32,6 +41,13 @@ function App({}: AppProps) {
           >
             Learn React
           </a>
+          <GoogleLogin
+            clientId="783960781972-i65i2n32ajpc112qvco3aeet8lud1cbo.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogleError}
+            cookiePolicy={'single_host_origin'}
+          />
         </p>
       </header>
     </div>
